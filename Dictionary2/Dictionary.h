@@ -140,10 +140,13 @@ void Dictionary::Dictionarysearch()
 {
 	if (dictionary == 'b')
 	{
+		TreeNode* temp;
 		cout << endl << "Enter the key to be searched." << endl;
 		char keytemp[20];
 		cin >> keytemp;
-		LibraryBST->BSTsearch(keytemp);
+		temp = LibraryBST->BSTsearch(keytemp);
+		if (temp != NULL)
+			cout << temp->data.key << " " << temp->data.book_title << " " << temp->data.author1 << " " << temp->data.author2 << " " << temp->data.author3 << " " << temp->data.publisher << " " << temp->data.price << " " << temp->data.number_of_books << endl;
 	}
 
 	if (dictionary == 'h')
