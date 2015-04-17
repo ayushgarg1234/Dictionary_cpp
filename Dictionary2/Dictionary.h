@@ -167,7 +167,7 @@ void Dictionary::Dictionarysearch()
 			//cout << index;
 			//cout << Librarychain.element[index].Head->next->element1.key;
 			if (Librarychain_p->search(keytemp, index) == 1)
-				cout << "Successful search at index " << index << endl;
+				cout << "Successful search, element is present at index " << index << endl;
 			else
 				cout << "Element not found" << endl;
 			break;
@@ -196,7 +196,10 @@ void Dictionary::Dictionarysearch()
 			if (!Library_p->find(index % MaxSize1))
 				cout << "Search failed, element not found." << endl;
 			if (!strcmp(Library_p->element[index % MaxSize1].key, keytemp))
+			{
 				cout << "Search successfull. The index for the element is: " << index % MaxSize1 << endl;
+				cout << Library_p->element[index % MaxSize1].key << " " << Library_p->element[index % MaxSize1].book_title << " " << Library_p->element[index % MaxSize1].author1 << " " << Library_p->element[index % MaxSize1].author2 << " " << Library_p->element[index % MaxSize1].author3 << " " << Library_p->element[index % MaxSize1].publisher << " " << Library_p->element[index % MaxSize1].price << " " << Library_p->element[index % MaxSize1].number_of_books << " " << endl;
+			}
 			if (j == MaxSize1)
 				cout << "Search failed, element not found." << endl;
 
@@ -227,7 +230,10 @@ void Dictionary::Dictionarysearch()
 			if (!Library_p->find(index % MaxSize1))
 				cout << "Search failed, element not found." << endl;
 			if (!strcmp(Library_p->element[index % MaxSize1].key, keytemp))
+			{
 				cout << "Search successfull. The index for the element is: " << index % MaxSize1;
+				cout << Library_p->element[index % MaxSize1].key << " " << Library_p->element[index % MaxSize1].book_title << " " << Library_p->element[index % MaxSize1].author1 << " " << Library_p->element[index % MaxSize1].author2 << " " << Library_p->element[index % MaxSize1].author3 << " " << Library_p->element[index % MaxSize1].publisher << " " << Library_p->element[index % MaxSize1].price << " " << Library_p->element[index % MaxSize1].number_of_books << " " << endl;
+			}
 			if (j == MaxSize1)
 				cout << "Search failed, element not found." << endl;
 

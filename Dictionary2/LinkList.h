@@ -62,7 +62,10 @@ bool LinkList::search1(char key[20])
 		temp = temp->next;
 	}
 	if (temp)
+	{
+		cout << temp->element1.key << " " << temp->element1.book_title << " " << temp->element1.author1 << " " << temp->element1.author2 << " " << temp->element1.author3 << " " << temp->element1.publisher << " " << temp->element1.price << " " << temp->element1.number_of_books << endl;
 		return true;
+	}
 	return false;
 }
 
