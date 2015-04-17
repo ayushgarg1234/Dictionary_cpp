@@ -12,11 +12,12 @@ public:
 	BST();
 	~BST();
 	void BSTinsert(book B);
-	void BSTsearch(char key[20]);
+	TreeNode* BSTsearch(char key[20]);
 	void BSTdelete(char key[20]);
 	void Preorder(TreeNode *N);
 	void Inorder(TreeNode *N);
 	void Postorder(TreeNode *N);
+	TreeNode* Successor(TreeNode* N);
 };
 
 BST::BST()
@@ -61,10 +62,10 @@ void BST::BSTinsert(book B)
 	temp->left = NULL;
 	temp->right = NULL;
 	temp->parent = temp2;
-	cout << "traversal" << endl;
+	Inorder(root);
 }
 
-void BST::BSTsearch(char key[20])
+TreeNode* BST::BSTsearch(char key[20])
 {
 	TreeNode *temp = root;
 	while (temp != NULL && strcmp(key, temp->data.key) != 0)
@@ -76,14 +77,46 @@ void BST::BSTsearch(char key[20])
 			temp = temp->right;
 	}
 	if (temp == NULL)
-		cout << "Unsuccessful search";
+	{
+		cout << "Unsuccessful search" << endl;
+		return temp;
+	}
 	else
-		cout << "Successful search";
+	{
+		cout << "Successful search" << endl;
+		return temp;
+	}
 }
 
 void BST::BSTdelete(char key[20])
 {
-
+	TreeNode* search = BSTsearch(key);
+	TreeNode* todelete;
+	TreeNode *z,*p;
+	if (search == NULL)
+		cout << "Element not found" << endl;
+	else
+	{
+		if (search->left == NULL || search->right == NULL)
+			todelete = search;
+		else
+			todelete = Successor(search);
+		if (todelete->left != NULL)
+			z = todelete->left;
+		else
+			z = todelete->right;
+		if (z != NULL)
+			z->parent = todelete->parent;
+		p = todelete->parent;
+		if (todelete == p->left)
+			p->left = z;
+		else
+			p->right = z;
+		if (todelete != search)
+			search->data = todelete->data;
+		cout << "delete successful" << endl;
+		Inorder(root);
+	}
 }
 
 void BST::Preorder(TreeNode *N)
@@ -116,3 +149,20 @@ void BST::Postorder(TreeNode *N)
 	}
 }
 
+TreeNode* BST::Successor(TreeNode* N)
+{
+	TreeNode* parent1;
+	if (N->right != NULL)
+	{
+		while (N->right->left != NULL)
+			N = N->left;
+		return N;
+	}
+	parent1 = N->parent;
+	while (parent1 != NULL && parent1->right == N)
+	{
+		N = parent1;
+		parent1 = parent1->parent;
+	}
+	return parent1;
+}

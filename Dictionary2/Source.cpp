@@ -15,12 +15,15 @@ using namespace std;
 int main()
 {
 	ofstream updatefile;
-	int size;
+	int size = 41;
 	ifstream file;
 
 Rehash:
-	cout << "Enter prime number size of dictionary." << endl;
-	cin >> size;
+	if (size == NULL)
+	{
+		cout << "Enter prime number size of dictionary." << endl;
+		cin >> size;
+	}
 	Dictionary Libraryrecord(size);
 	file.open("input.txt");
 	while (!file.eof())
@@ -57,6 +60,7 @@ Rehash:
 		if (Rehash == -1)
 		{
 			file.close();
+			size = NULL;
 			goto Rehash;
 		}
 	}
@@ -99,8 +103,10 @@ Rehash:
 			int Rehash;
 			Rehash = Libraryrecord.Dictionaryinsert(B);
 			if (Rehash == -1)
+			{
+				size = NULL;
 				goto Rehash;
-			
+			}
 			break;
 		case 's':
 			Libraryrecord.Dictionarysearch();

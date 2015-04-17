@@ -242,7 +242,7 @@ void Dictionary::Dictionarydelete()
 		cout << endl << "Enter the key to be deleted." << endl;
 		char keytemp[20];
 		cin >> keytemp;
-		//LibraryBST->BSTdelete(keytemp);
+		LibraryBST->BSTdelete(keytemp);
 	}
 
 	if (dictionary == 'h')
