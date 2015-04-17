@@ -4,6 +4,7 @@ class TreeNode{
 public:
 	book data;
 	TreeNode *parent, *left, *right;
+	int height = -1;
 };
 
 class BST{
@@ -100,7 +101,9 @@ void BST::BSTdelete(char key[20])
 		if (search->left == NULL || search->right == NULL)
 			todelete = search;
 		else
+		{
 			todelete = Successor(search);
+		}
 		if (todelete->left != NULL)
 			z = todelete->left;
 		else
@@ -108,12 +111,19 @@ void BST::BSTdelete(char key[20])
 		if (z != NULL)
 			z->parent = todelete->parent;
 		p = todelete->parent;
-		if (todelete == p->left)
-			p->left = z;
+		if (p == NULL)
+		{
+			root = z;
+		}
 		else
-			p->right = z;
-		if (todelete != search)
-			search->data = todelete->data;
+		{
+			if (todelete == p->left)
+				p->left = z;
+			else
+				p->right = z;
+			if (todelete != search)
+				search->data = todelete->data;
+		}
 		cout << "delete successful" << endl;
 		Inorder(root);
 	}
@@ -154,7 +164,8 @@ TreeNode* BST::Successor(TreeNode* N)
 	TreeNode* parent1;
 	if (N->right != NULL)
 	{
-		while (N->right->left != NULL)
+		N = N->right;
+		while (N->left != NULL)
 			N = N->left;
 		return N;
 	}
@@ -166,3 +177,9 @@ TreeNode* BST::Successor(TreeNode* N)
 	}
 	return parent1;
 }
+
+class AVL : public BST
+{
+	void updateheight(TreeNode* N);
+
+};
