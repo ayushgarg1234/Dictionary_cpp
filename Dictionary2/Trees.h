@@ -4,7 +4,7 @@ class TreeNode{
 public:
 	book data;
 	TreeNode *parent, *left, *right;
-	int height = -1;
+	int height = 0;
 };
 
 class BST{
@@ -64,8 +64,7 @@ TreeNode* BST::BSTinsert(book B)
 	temp->right = NULL;
 	temp->parent = temp2;
 	cout << "Insert successful" << endl;
-	Inorder(root);
-	return temp;
+	return temp->parent;
 }
 
 TreeNode* BST::BSTsearch(char key[20])
@@ -146,7 +145,7 @@ void BST::Inorder(TreeNode *N)
 	if (N != NULL)
 	{
 		Inorder(N->left);
-		cout << N->data.key << endl;
+		cout << N->data.key << " " << N->height << endl;
 		Inorder(N->right);
 	}
 }
@@ -190,21 +189,25 @@ public:
 TreeNode* AVL::updateheight(TreeNode* N)
 {
 	int balancefactor = NULL;
-	TreeNode* balancecheck = N->parent;
-	N->height = 0;
-	while (N->parent != NULL)
-	{
-		if (N->parent->left != NULL && N->parent->right != NULL)
+	TreeNode* balancecheck = N;
+		while (N != NULL)
 		{
-			if (N->parent->left->height > N->parent->right->height)
-				N->parent->height = N->parent->left->height + 1;
+			if (N->left != NULL && N->right != NULL)
+			{
+				if (N->left->height > N->right->height)
+					N->height = N->left->height + 1;
+				else
+					N->height = N->right->height + 1;
+			}
+			else if (N->left == NULL && N->right != NULL)
+				N->height = N->right->height + 1;
+			else if (N->left != NULL && N->right == NULL)
+				N->height = N->left->height + 1;
 			else
-				N->parent->height = N->parent->right->height + 1;
+				N->height = 0;
+			N = N->parent;
 		}
-		else
-			N->parent->height = N->height + 1;
-		N = N->parent;
+		return balancecheck;
 	}
 
 
-}

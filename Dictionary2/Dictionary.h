@@ -7,6 +7,7 @@ public:
 	char collision;
 	Dictionary(int MaxSize);
 	~Dictionary();
+	AVL* LibraryAVL;
 	BST* LibraryBST;
 	LinkListarray* Librarychain_p;
 	LinearList* Library_p;
@@ -21,11 +22,17 @@ Dictionary::Dictionary(int MaxSize)
 
 	MaxSize1 = MaxSize;
 	int offset;
-	cout << "Which method you want to use to implement dictionary? Press 'h' for hashing, 'b' for BST ";
+	cout << "Which method you want to use to implement dictionary? Press 'h' for hashing, 'b' for BST , 'a' for AVL";
 	cin >> dictionary;
+
 	if (dictionary == 'b')
 	{
 		LibraryBST = new BST();
+	}
+
+	else if (dictionary == 'a')
+	{
+		LibraryAVL = new AVL();
 	}
 
 	else if (dictionary == 'h')
@@ -58,7 +65,14 @@ int Dictionary::Dictionaryinsert(book B)
 	if (dictionary == 'b')
 	{
 		LibraryBST->BSTinsert(B);
+		LibraryBST->Inorder(LibraryBST->root);
 		return 0;
+	}
+
+	if (dictionary == 'a')
+	{
+		LibraryAVL->updateheight(LibraryAVL->BSTinsert(B));
+		LibraryAVL->Inorder(LibraryAVL->root);
 	}
 
 	if (dictionary == 'h')
