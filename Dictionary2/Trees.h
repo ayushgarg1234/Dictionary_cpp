@@ -188,26 +188,70 @@ public:
 
 TreeNode* AVL::updateheight(TreeNode* N)
 {
-	int balancefactor = NULL;
-	TreeNode* balancecheck = N;
-		while (N != NULL)
+	TreeNode* copy = N;
+	TreeNode* balancecheck = NULL;
+	while (N != NULL)
+	{
+		if (N->left != NULL && N->right != NULL)
 		{
-			if (N->left != NULL && N->right != NULL)
+			if (N->left->height > N->right->height)
 			{
-				if (N->left->height > N->right->height)
-					N->height = N->left->height + 1;
-				else
-					N->height = N->right->height + 1;
-			}
-			else if (N->left == NULL && N->right != NULL)
-				N->height = N->right->height + 1;
-			else if (N->left != NULL && N->right == NULL)
+				if (N->height == N->left->height + 1)
+					break;
 				N->height = N->left->height + 1;
+			}
 			else
-				N->height = 0;
-			N = N->parent;
+			{
+				if (N->height == N->right->height + 1)
+					break;
+				N->height = N->right->height + 1;
+			}
 		}
-		return balancecheck;
+		else if (N->left == NULL && N->right != NULL)
+		{
+			if (N->height == N->right->height + 1)
+				break;
+			N->height = N->right->height + 1;
+		}
+		else if (N->left != NULL && N->right == NULL)
+		{
+			if (N->height == N->left->height + 1)
+				break;
+			N->height = N->left->height + 1;
+		}
+		else
+			N->height = 0;
+		N = N->parent;
 	}
+	while (copy != NULL)
+	{
+		if (copy->left != NULL && copy->right != NULL)
+		{
+			if ((copy->left->height - copy->right->height) >= 2 || (copy->left->height - copy->right->height) <= -2)
+			{
+				balancecheck = copy;
+				break;
+			}
+		}
+		else if (copy->left == NULL && copy->right != NULL)
+		{
+			if (copy->right->height >= 1)
+			{
+				balancecheck = copy;
+				break;
+			}
+		}
+		else if (copy->left != NULL && copy->right == NULL)
+		{
+			if (copy->left->height >= 1)
+			{
+				balancecheck = copy;
+				break;
+			}
+		}
+		copy = copy->parent;
+	}
+	return balancecheck;
+}
 
 
