@@ -12,7 +12,7 @@ public:
 	TreeNode *root;
 	BST();
 	~BST();
-	void BSTinsert(book B);
+	TreeNode* BSTinsert(book B);
 	TreeNode* BSTsearch(char key[20]);
 	void BSTdelete(char key[20]);
 	void Preorder(TreeNode *N);
@@ -31,13 +31,13 @@ BST::~BST()
 	root = NULL;
 }
 
-void BST::BSTinsert(book B)
+TreeNode* BST::BSTinsert(book B)
 {
 	TreeNode *temp = root, *temp2 = NULL;
 
 	while (temp != NULL)
 	{
-		if (strcmp(B.key, temp->data.key) == -1)
+		if (strcmp(B.key, temp->data.key) < 0)
 		{
 			temp2 = temp;
 			temp = temp->left;
@@ -54,7 +54,7 @@ void BST::BSTinsert(book B)
 		root = temp;
 	if (temp2 != NULL)
 	{
-		if (strcmp(B.key, temp2->data.key) == -1)
+		if (strcmp(B.key, temp2->data.key) < 0)
 			temp2->left = temp;
 		else
 			temp2->right = temp;
@@ -63,7 +63,9 @@ void BST::BSTinsert(book B)
 	temp->left = NULL;
 	temp->right = NULL;
 	temp->parent = temp2;
+	cout << "Insert successful" << endl;
 	Inorder(root);
+	return temp;
 }
 
 TreeNode* BST::BSTsearch(char key[20])
@@ -72,7 +74,7 @@ TreeNode* BST::BSTsearch(char key[20])
 	while (temp != NULL && strcmp(key, temp->data.key) != 0)
 	{
 		//cout << temp->data.key << endl;
-		if (strcmp(key, temp->data.key) == -1)
+		if (strcmp(key, temp->data.key) < 0)
 			temp = temp->left;
 		else
 			temp = temp->right;
@@ -93,7 +95,7 @@ void BST::BSTdelete(char key[20])
 {
 	TreeNode* search = BSTsearch(key);
 	TreeNode* todelete;
-	TreeNode *z,*p;
+	TreeNode *z, *p;
 	if (search == NULL)
 		cout << "Element not found" << endl;
 	else
@@ -180,6 +182,29 @@ TreeNode* BST::Successor(TreeNode* N)
 
 class AVL : public BST
 {
-	void updateheight(TreeNode* N);
+public:
+	TreeNode* updateheight(TreeNode* N);
 
 };
+
+TreeNode* AVL::updateheight(TreeNode* N)
+{
+	int balancefactor = NULL;
+	TreeNode* balancecheck = N->parent;
+	N->height = 0;
+	while (N->parent != NULL)
+	{
+		if (N->parent->left != NULL && N->parent->right != NULL)
+		{
+			if (N->parent->left->height > N->parent->right->height)
+				N->parent->height = N->parent->left->height + 1;
+			else
+				N->parent->height = N->parent->right->height + 1;
+		}
+		else
+			N->parent->height = N->height + 1;
+		N = N->parent;
+	}
+
+
+}
