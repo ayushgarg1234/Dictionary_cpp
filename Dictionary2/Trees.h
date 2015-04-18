@@ -183,7 +183,10 @@ class AVL : public BST
 {
 public:
 	TreeNode* updateheight(TreeNode* N);
-
+	int balancefactorcompute(TreeNode* N);
+	void rightrotation(TreeNode* N);
+	void leftrotation(TreeNode* N);
+	void fixup(TreeNode* N);
 };
 
 TreeNode* AVL::updateheight(TreeNode* N)
@@ -225,33 +228,31 @@ TreeNode* AVL::updateheight(TreeNode* N)
 	}
 	while (copy != NULL)
 	{
-		if (copy->left != NULL && copy->right != NULL)
+		if (balancefactorcompute(copy) == 2 || balancefactorcompute(copy) == -2)
 		{
-			if ((copy->left->height - copy->right->height) >= 2 || (copy->left->height - copy->right->height) <= -2)
-			{
-				balancecheck = copy;
-				break;
-			}
-		}
-		else if (copy->left == NULL && copy->right != NULL)
-		{
-			if (copy->right->height >= 1)
-			{
-				balancecheck = copy;
-				break;
-			}
-		}
-		else if (copy->left != NULL && copy->right == NULL)
-		{
-			if (copy->left->height >= 1)
-			{
-				balancecheck = copy;
-				break;
-			}
+			balancecheck = copy;
+			break;
 		}
 		copy = copy->parent;
 	}
 	return balancecheck;
 }
 
+int AVL::balancefactorcompute(TreeNode* N)
+{
+	if (N->left != NULL && N->right != NULL)
+	{
+		return N->left->height - N->right->height;
+	}
+	else if (N->left == NULL && N->right != NULL)
+	{
+		return (-1 - (N->right->height));
+	}
+	else if (N->left != NULL && N->right == NULL)
+	{
+		return ((N->left->height) + 1);
+	}
+	else
+		return 0;
+}
 
