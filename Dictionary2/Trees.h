@@ -15,6 +15,7 @@ public:
 	TreeNode* BSTinsert(book B);
 	TreeNode* BSTsearch(char key[20]);
 	TreeNode* BSTdelete(char key[20]);
+	void updatefile(TreeNode* N);
 	void Preorder(TreeNode *N);
 	void Inorder(TreeNode *N);
 	void Postorder(TreeNode *N);
@@ -160,6 +161,20 @@ void BST::Postorder(TreeNode *N)
 		Postorder(N->left);
 		Postorder(N->right);
 		cout << N->data.key << " " << N->height << endl;
+	}
+}
+
+void BST::updatefile(TreeNode* N)
+{
+	ofstream temp;
+	ifstream temp2;
+	temp.open("input.txt", std::ios_base::app);
+	if (N != NULL)
+	{
+		//if (N != root)
+		temp << N->data.key << " " << N->data.book_title << " " << N->data.author1 << " " << N->data.author2 << " " << N->data.author3 << " " << N->data.publisher << " " << N->data.price << " " << N->data.number_of_books << endl;
+		updatefile(N->left);
+		updatefile(N->right);
 	}
 }
 
@@ -327,7 +342,7 @@ void AVL::fixup(TreeNode* N)
 		}
 	}
 
-	if (balancefactorcompute(N) == 2)
+	if (balancefactorcompute(N) == -2)
 	{
 		y = N->right;
 		if (balancefactorcompute(y) == -1)

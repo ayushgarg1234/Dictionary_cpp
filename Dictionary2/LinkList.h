@@ -113,7 +113,7 @@ void LinkList::updatefile1()
 		}
 		temp = temp->next;
 	}
-
+	file1.close();
 }
 
 bool LinkList::Isempty1(LinkList L)

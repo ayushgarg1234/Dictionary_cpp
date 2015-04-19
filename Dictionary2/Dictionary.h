@@ -65,7 +65,7 @@ int Dictionary::Dictionaryinsert(book B)
 	if (dictionary == 'b')
 	{
 		LibraryBST->BSTinsert(B);
-		LibraryBST->Preorder(LibraryBST->root);
+		LibraryBST->Inorder(LibraryBST->root);
 		return 0;
 	}
 
@@ -75,7 +75,7 @@ int Dictionary::Dictionaryinsert(book B)
 		tempnode = LibraryAVL->updateheight(LibraryAVL->BSTinsert(B));
 		if (tempnode != NULL)
 			LibraryAVL->fixup(tempnode);
-		LibraryAVL->Preorder(LibraryAVL->root);
+		LibraryAVL->Inorder(LibraryAVL->root);
 	}
 
 	if (dictionary == 'h')
@@ -280,6 +280,7 @@ void Dictionary::Dictionarydelete()
 		char keytemp[20];
 		cin >> keytemp;
 		LibraryBST->BSTdelete(keytemp);
+		LibraryBST->Inorder(LibraryBST->root);
 	}
 
 	if (dictionary == 'a')
@@ -291,7 +292,7 @@ void Dictionary::Dictionarydelete()
 		tempnode = LibraryAVL->updateheight(LibraryAVL->BSTdelete(keytemp));
 		if (tempnode != NULL)
 			LibraryAVL->fixup(tempnode);
-		LibraryAVL->Preorder(LibraryAVL->root);
+		LibraryAVL->Inorder(LibraryAVL->root);
 	}
 
 	if (dictionary == 'h')
