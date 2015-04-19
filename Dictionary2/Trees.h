@@ -14,7 +14,7 @@ public:
 	~BST();
 	TreeNode* BSTinsert(book B);
 	TreeNode* BSTsearch(char key[20]);
-	void BSTdelete(char key[20]);
+	TreeNode* BSTdelete(char key[20]);
 	void Preorder(TreeNode *N);
 	void Inorder(TreeNode *N);
 	void Postorder(TreeNode *N);
@@ -90,13 +90,16 @@ TreeNode* BST::BSTsearch(char key[20])
 	}
 }
 
-void BST::BSTdelete(char key[20])
+TreeNode* BST::BSTdelete(char key[20])
 {
 	TreeNode* search = BSTsearch(key);
 	TreeNode* todelete;
 	TreeNode *z, *p;
 	if (search == NULL)
+	{
 		cout << "Element not found" << endl;
+		return NULL;
+	}
 	else
 	{
 		if (search->left == NULL || search->right == NULL)
@@ -126,7 +129,7 @@ void BST::BSTdelete(char key[20])
 				search->data = todelete->data;
 		}
 		cout << "delete successful" << endl;
-		Inorder(root);
+		return todelete->parent;
 	}
 }
 
@@ -277,6 +280,8 @@ void AVL::rightrotation(TreeNode* N)
 	N->parent = y;
 	y->right = N;
 	N->left = yr;
+	if (yr != NULL)
+		yr->parent = N;
 	updateheight(N);
 }
 
@@ -301,6 +306,8 @@ void AVL::leftrotation(TreeNode* N)
 	N->parent = y;
 	y->left = N;
 	N->right = yr;
+	if (yr != NULL)
+		yr->parent = N;
 	updateheight(N);
 }
 

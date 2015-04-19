@@ -166,6 +166,17 @@ void Dictionary::Dictionarysearch()
 			cout << temp->data.key << " " << temp->data.book_title << " " << temp->data.author1 << " " << temp->data.author2 << " " << temp->data.author3 << " " << temp->data.publisher << " " << temp->data.price << " " << temp->data.number_of_books << endl;
 	}
 
+	if (dictionary == 'a')
+	{
+		TreeNode* temp;
+		cout << endl << "Enter the key to be searched." << endl;
+		char keytemp[20];
+		cin >> keytemp;
+		temp = LibraryAVL->BSTsearch(keytemp);
+		if (temp != NULL)
+			cout << temp->data.key << " " << temp->data.book_title << " " << temp->data.author1 << " " << temp->data.author2 << " " << temp->data.author3 << " " << temp->data.publisher << " " << temp->data.price << " " << temp->data.number_of_books << endl;
+	}
+
 	if (dictionary == 'h')
 	{
 		unsigned int hvalue;
@@ -271,6 +282,18 @@ void Dictionary::Dictionarydelete()
 		LibraryBST->BSTdelete(keytemp);
 	}
 
+	if (dictionary == 'a')
+	{
+		cout << endl << "Enter the key to be deleted." << endl;
+		TreeNode* tempnode;
+		char keytemp[20];
+		cin >> keytemp;
+		tempnode = LibraryAVL->updateheight(LibraryAVL->BSTdelete(keytemp));
+		if (tempnode != NULL)
+			LibraryAVL->fixup(tempnode);
+		LibraryAVL->Preorder(LibraryAVL->root);
+	}
+
 	if (dictionary == 'h')
 	{
 		unsigned int hvalue;
@@ -367,4 +390,3 @@ void Dictionary::Dictionarydelete()
 		}
 	}
 }
-
