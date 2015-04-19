@@ -134,7 +134,7 @@ void BST::Preorder(TreeNode *N)
 {
 	if (N != NULL)
 	{
-		cout << N->data.key << endl;
+		cout << N->data.key << " " << N->height << endl;
 		Preorder(N->left);
 		Preorder(N->right);
 	}
@@ -156,7 +156,7 @@ void BST::Postorder(TreeNode *N)
 	{
 		Postorder(N->left);
 		Postorder(N->right);
-		cout << N->data.key << endl;
+		cout << N->data.key << " " << N->height << endl;
 	}
 }
 
@@ -254,5 +254,83 @@ int AVL::balancefactorcompute(TreeNode* N)
 	}
 	else
 		return 0;
+}
+
+void AVL::rightrotation(TreeNode* N)
+{
+	TreeNode *y, *p, *yr;
+	y = N->left;
+	p = N->parent;
+	y->parent = p;
+	if (p == NULL)
+	{
+		root = y;
+	}
+	else
+	{
+		if (p->right == N)
+			p->right = y;
+		else
+			p->left = y;
+	}
+	yr = y->right;
+	N->parent = y;
+	y->right = N;
+	N->left = yr;
+	updateheight(N);
+}
+
+void AVL::leftrotation(TreeNode* N)
+{
+	TreeNode *y, *p, *yr;
+	y = N->right;
+	p = N->parent;
+	y->parent = p;
+	if (p == NULL)
+	{
+		root = y;
+	}
+	else
+	{
+		if (p->right == N)
+			p->right = y;
+		else
+			p->left = y;
+	}
+	yr = y->left;
+	N->parent = y;
+	y->left = N;
+	N->right = yr;
+	updateheight(N);
+}
+
+void AVL::fixup(TreeNode* N)
+{
+	TreeNode *y;
+	if (balancefactorcompute(N) == 2)
+	{
+		y = N->left;
+		if (balancefactorcompute(y) == 1)
+			rightrotation(N);
+		else
+		{
+			if (balancefactorcompute(y) == -1)
+				leftrotation(y);
+			rightrotation(N);
+		}
+	}
+
+	if (balancefactorcompute(N) == 2)
+	{
+		y = N->right;
+		if (balancefactorcompute(y) == -1)
+			leftrotation(N);
+		else
+		{
+			if (balancefactorcompute(y) == 1)
+				rightrotation(y);
+			leftrotation(N);
+		}
+	}
 }
 

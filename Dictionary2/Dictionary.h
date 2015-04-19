@@ -71,8 +71,10 @@ int Dictionary::Dictionaryinsert(book B)
 
 	if (dictionary == 'a')
 	{
-		if (LibraryAVL->updateheight(LibraryAVL->BSTinsert(B)) != NULL)
-			cout << "Imbalance occurred" << endl;
+		TreeNode* tempnode;
+		tempnode = LibraryAVL->updateheight(LibraryAVL->BSTinsert(B));
+		if (tempnode != NULL)
+			LibraryAVL->fixup(tempnode);
 		LibraryAVL->Inorder(LibraryAVL->root);
 	}
 
