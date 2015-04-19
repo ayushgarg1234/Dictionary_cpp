@@ -65,7 +65,7 @@ int Dictionary::Dictionaryinsert(book B)
 	if (dictionary == 'b')
 	{
 		LibraryBST->BSTinsert(B);
-		LibraryBST->Inorder(LibraryBST->root);
+		LibraryBST->Preorder(LibraryBST->root);
 		return 0;
 	}
 
@@ -75,7 +75,7 @@ int Dictionary::Dictionaryinsert(book B)
 		tempnode = LibraryAVL->updateheight(LibraryAVL->BSTinsert(B));
 		if (tempnode != NULL)
 			LibraryAVL->fixup(tempnode);
-		LibraryAVL->Inorder(LibraryAVL->root);
+		LibraryAVL->Preorder(LibraryAVL->root);
 	}
 
 	if (dictionary == 'h')
