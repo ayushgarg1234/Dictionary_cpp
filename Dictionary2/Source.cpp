@@ -121,33 +121,48 @@ Rehash:
 			break;
 	}
 
-	updatefile.open("input.txt");
-	bool check = false;
-
-	for (int i = 0; i < size; i++)
+	if (Libraryrecord.dictionary == 'h' && Libraryrecord.collision != 'c')
 	{
-		char a = ' ';
-		char b = '\n';
-		if (Libraryrecord.Library_p->find(i))
+		updatefile.open("input.txt");
+		for (int i = 0; i < size; i++)
 		{
-			check = true;
-			updatefile << Libraryrecord.Library_p->element[i].key << a;
-			updatefile << Libraryrecord.Library_p->element[i].book_title << a;
-			updatefile << Libraryrecord.Library_p->element[i].author1 << a;
-			updatefile << Libraryrecord.Library_p->element[i].author2 << a;
-			updatefile << Libraryrecord.Library_p->element[i].author3 << a;
-			updatefile << Libraryrecord.Library_p->element[i].publisher << a;
-			updatefile << Libraryrecord.Library_p->element[i].price << a;
-			updatefile << Libraryrecord.Library_p->element[i].number_of_books << b;
+			char a = ' ';
+			char b = '\n';
+			if (Libraryrecord.Library_p->find(i))
+			{
+				updatefile << Libraryrecord.Library_p->element[i].key << a;
+				updatefile << Libraryrecord.Library_p->element[i].book_title << a;
+				updatefile << Libraryrecord.Library_p->element[i].author1 << a;
+				updatefile << Libraryrecord.Library_p->element[i].author2 << a;
+				updatefile << Libraryrecord.Library_p->element[i].author3 << a;
+				updatefile << Libraryrecord.Library_p->element[i].publisher << a;
+				updatefile << Libraryrecord.Library_p->element[i].price << a;
+				updatefile << Libraryrecord.Library_p->element[i].number_of_books << b;
+			}
 		}
+		updatefile.close();
 	}
-	updatefile.close();
-	if (check == false)
+	if (Libraryrecord.dictionary == 'h' && Libraryrecord.collision == 'c')
 	{
+		updatefile.open("input.txt");
 		for (int i = 0; i < size; i++)
 		{
 			Libraryrecord.Librarychain_p->updatefile(i);
 		}
+		updatefile.close();
+	}
+	if (Libraryrecord.dictionary != 'h')
+	{
+		updatefile.open("input.txt");
+		if (Libraryrecord.dictionary == 'b')
+		{
+			Libraryrecord.LibraryBST->updatefile(Libraryrecord.LibraryBST->root);
+		}
+		if (Libraryrecord.dictionary == 'a')
+		{
+			Libraryrecord.LibraryAVL->updatefile(Libraryrecord.LibraryAVL->root);
+		}
+		updatefile.close();
 	}
 	system("pause");
 	return 0;
