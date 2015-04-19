@@ -216,30 +216,14 @@ TreeNode* AVL::updateheight(TreeNode* N)
 		if (N->left != NULL && N->right != NULL)
 		{
 			if (N->left->height > N->right->height)
-			{
-				if (N->height == N->left->height + 1)
-					break;
 				N->height = N->left->height + 1;
-			}
 			else
-			{
-				if (N->height == N->right->height + 1)
-					break;
 				N->height = N->right->height + 1;
-			}
 		}
 		else if (N->left == NULL && N->right != NULL)
-		{
-			if (N->height == N->right->height + 1)
-				break;
 			N->height = N->right->height + 1;
-		}
 		else if (N->left != NULL && N->right == NULL)
-		{
-			if (N->height == N->left->height + 1)
-				break;
 			N->height = N->left->height + 1;
-		}
 		else
 			N->height = 0;
 		N = N->parent;
