@@ -22,7 +22,7 @@ Dictionary::Dictionary(int MaxSize)
 
 	MaxSize1 = MaxSize;
 	int offset;
-	cout << "Which method you want to use to implement dictionary? Press 'h' for hashing, 'b' for BST , 'a' for AVL";
+	cout << "Which method you want to use to implement dictionary? Press 'h' for hashing, 'b' for BST , 'a' for AVL" << endl;
 	cin >> dictionary;
 
 	if (dictionary == 'b')
@@ -37,7 +37,7 @@ Dictionary::Dictionary(int MaxSize)
 
 	else if (dictionary == 'h')
 	{
-		cout << "Which collision method is to be used? Press 'c' for chaining, 'l' for linear probing, 'd' for double hashing.";
+		cout << "Which collision method is to be used? Press 'c' for chaining, 'l' for linear probing, 'd' for double hashing." << endl;
 		cin >> collision;
 		if (collision == 'c')
 		{
@@ -52,7 +52,7 @@ Dictionary::Dictionary(int MaxSize)
 	}
 
 	else
-		cout << "Wrong input";
+		cout << "Wrong input" << endl;
 }
 
 Dictionary::~Dictionary()
@@ -142,7 +142,6 @@ int Dictionary::Dictionaryinsert(book B)
 			}
 			if (Library_p->len == MaxSize1)
 			{
-				cout << "rehashing please enter new size and inputs again." << endl;
 				return -1;
 			}
 			break;
@@ -259,7 +258,7 @@ void Dictionary::Dictionarysearch()
 				cout << "Search failed, element not found." << endl;
 			if (!strcmp(Library_p->element[index % MaxSize1].key, keytemp))
 			{
-				cout << "Search successfull. The index for the element is: " << index % MaxSize1;
+				cout << "Search successfull. The index for the element is: " << index % MaxSize1 << endl;
 				cout << Library_p->element[index % MaxSize1].key << " " << Library_p->element[index % MaxSize1].book_title << " " << Library_p->element[index % MaxSize1].author1 << " " << Library_p->element[index % MaxSize1].author2 << " " << Library_p->element[index % MaxSize1].author3 << " " << Library_p->element[index % MaxSize1].publisher << " " << Library_p->element[index % MaxSize1].price << " " << Library_p->element[index % MaxSize1].number_of_books << " " << endl;
 			}
 			if (j == MaxSize1)
@@ -360,7 +359,7 @@ void Dictionary::Dictionarydelete()
 			index = Hash.hash_compression_map(hvalue, MaxSize1);
 			offset = Hash.hash_compression_map2(hvalue);
 			j = 0;
-			cout << index;
+			//cout << index;
 			while (j != MaxSize1)
 			{
 				if (!Library_p->find(index % MaxSize1))
