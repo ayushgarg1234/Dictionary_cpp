@@ -171,8 +171,10 @@ void BST::updatefile(TreeNode* N)
 	temp.open("input.txt", std::ios_base::app);
 	if (N != NULL)
 	{
-		//if (N != root)
-		temp << N->data.key << " " << N->data.book_title << " " << N->data.author1 << " " << N->data.author2 << " " << N->data.author3 << " " << N->data.publisher << " " << N->data.price << " " << N->data.number_of_books << endl;
+		if (Successor(N))
+			temp << N->data.key << " " << N->data.book_title << " " << N->data.author1 << " " << N->data.author2 << " " << N->data.author3 << " " << N->data.publisher << " " << N->data.price << " " << N->data.number_of_books << endl;
+		else
+			temp << N->data.key << " " << N->data.book_title << " " << N->data.author1 << " " << N->data.author2 << " " << N->data.author3 << " " << N->data.publisher << " " << N->data.price << " " << N->data.number_of_books;
 		updatefile(N->left);
 		updatefile(N->right);
 	}
