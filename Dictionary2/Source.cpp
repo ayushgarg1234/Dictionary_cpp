@@ -29,32 +29,7 @@ Rehash:
 	while (!file.eof())
 	{
 		book B;
-		char key[20];
-		char book_title[20];
-		char author1[20];
-		char author2[20];
-		char author3[20];
-		char publisher[20];
-		float price;
-		int number_of_books;
-		file >> key;
-		file >> book_title;
-		file >> author1;
-		file >> author2;
-		file >> author3;
-		file >> publisher;
-		file >> price;
-		file >> number_of_books;
-
-		strcpy(B.author1, author1);
-		strcpy(B.author2, author2);
-		strcpy(B.author3, author3);
-		strcpy(B.book_title, book_title);
-		B.number_of_books = number_of_books;
-		B.price = price;
-		strcpy(B.publisher, publisher);
-		strcpy(B.key, key);
-
+		file >> B.key >> B.book_title >> B.author1 >> B.author2 >> B.author3 >> B.publisher >> B.price >> B.number_of_books;
 		int Rehash;
 		Rehash = Libraryrecord.Dictionaryinsert(B);
 		if (Rehash == -1)
@@ -74,32 +49,7 @@ Rehash:
 		{
 		case 'i':
 			book B;
-			char key[20];
-			char book_title[20];
-			char author1[20];
-			char author2[20];
-			char author3[20];
-			char publisher[20];
-			float price;
-			int number_of_books;
-			cin >> key;
-			cin >> book_title;
-			cin >> author1;
-			cin >> author2;
-			cin >> author3;
-			cin >> publisher;
-			cin >> price;
-			cin >> number_of_books;
-
-			strcpy(B.author1, author1);
-			strcpy(B.author2, author2);
-			strcpy(B.author3, author3);
-			strcpy(B.book_title, book_title);
-			B.number_of_books = number_of_books;
-			B.price = price;
-			strcpy(B.publisher, publisher);
-			strcpy(B.key, key);
-
+			cin >> B.key >> B.book_title >> B.author1 >> B.author2 >> B.author3 >> B.publisher >> B.price >> B.number_of_books;
 			int Rehash;
 			Rehash = Libraryrecord.Dictionaryinsert(B);
 			if (Rehash == -1)
