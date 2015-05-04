@@ -8,6 +8,7 @@
 #include "linearList_Sequential.h"
 #include "LinkList.h"
 #include "Trees.h"
+#include "2-4_Tree.h"
 #include "Dictionary.h"
 
 using namespace std;

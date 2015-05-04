@@ -68,6 +68,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="2-4_Tree.h" />
     <ClInclude Include="Book.h" />
     <ClInclude Include="Dictionary.h" />
     <ClInclude Include="Hash.h" />
