@@ -9,6 +9,7 @@ public:
 	~Dictionary();
 	AVL* LibraryAVL;
 	BST* LibraryBST;
+	Tree_234* Library234;
 	LinkListarray* Librarychain_p;
 	LinearList* Library_p;
 	int Dictionaryinsert(book B);
@@ -22,7 +23,7 @@ Dictionary::Dictionary(int MaxSize)
 
 	MaxSize1 = MaxSize;
 	int offset;
-	cout << "Which method you want to use to implement dictionary? Press 'h' for hashing, 'b' for BST , 'a' for AVL" << endl;
+	cout << "Which method you want to use to implement dictionary? Press 'h' for hashing, 'b' for BST, 'a' for AVL, 'm' for 2-4 tree ?" << endl;
 	cin >> dictionary;
 
 	if (dictionary == 'b')
@@ -33,6 +34,11 @@ Dictionary::Dictionary(int MaxSize)
 	else if (dictionary == 'a')
 	{
 		LibraryAVL = new AVL();
+	}
+
+	else if (dictionary == 'm')
+	{
+		Library234 = new Tree_234();
 	}
 
 	else if (dictionary == 'h')
@@ -76,6 +82,11 @@ int Dictionary::Dictionaryinsert(book B)
 		if (tempnode != NULL)
 			LibraryAVL->fixup(tempnode);
 		LibraryAVL->Inorder(LibraryAVL->root);
+	}
+
+	if (dictionary == 'm')
+	{
+		Library234->treeinsert(B, Library234->root);
 	}
 
 	if (dictionary == 'h')
@@ -174,6 +185,25 @@ void Dictionary::Dictionarysearch()
 		temp = LibraryAVL->BSTsearch(keytemp);
 		if (temp != NULL)
 			cout << temp->data.key << " " << temp->data.book_title << " " << temp->data.author1 << " " << temp->data.author2 << " " << temp->data.author3 << " " << temp->data.publisher << " " << temp->data.price << " " << temp->data.number_of_books << endl;
+	}
+
+	if (dictionary == 'm')
+	{
+		Node_234_Tree* temp;
+
+		int* index = new int;
+
+		cout << endl << "Enter the key to be searched." << endl;
+		char keytemp[20];
+		cin >> keytemp;
+		temp = Library234->search(Library234->root, keytemp, index);
+		if (temp != NULL)
+		{
+			cout << "record found" << endl;
+			cout << temp->data[*index].key << " " << temp->data[*index].book_title << " " << temp->data[*index].author1 << " " << temp->data[*index].author2 << " " << temp->data[*index].author3 << " " << temp->data[*index].publisher << " " << temp->data[*index].price << " " << temp->data[*index].number_of_books << endl;
+		}
+		else
+			cout << "record not found.";
 	}
 
 	if (dictionary == 'h')
